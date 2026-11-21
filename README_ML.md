@@ -1,5 +1,5 @@
 
-# Module Machine Learning — LocalNet-Dynamics
+# Module Machine Learning : LocalNet-Dynamics
 
 ## 1. Présentation
 

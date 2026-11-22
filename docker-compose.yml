@@ -1,0 +1,7 @@
+services:
+  dashboard:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./machine_learning/models:/app/machine_learning/models:ro

@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Vérifier la syntaxe Python
+        run: python -m compileall -q .
+      - name: Construire l'image Docker
+        run: docker build -t supervision-reseau .
+      - name: Tester le démarrage du dashboard
+        run: |
+          docker run -d -p 8501:8501 --name dash supervision-reseau
+          for i in $(seq 1 30); do
+            curl -fs http://localhost:8501/_stcore/health && exit 0
+            sleep 2
+          done
+          docker logs dash
+          exit 1

@@ -32,3 +32,5 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+data/live_data.csv
+data/live_data.csv
